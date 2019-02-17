@@ -3,11 +3,10 @@ package calculateDamLevelStuff;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class calculateDamLevel.
  */
-public class CalculateDamLevel {
+public class newnullptr_CalculateDamLevel {
 	
 	/** The selected flow rate deviation. */
 	// div_
@@ -42,10 +41,10 @@ public class CalculateDamLevel {
 	 *
 	 * @param myDailyData the my daily data
 	 */
-	CalculateDamLevel(DailyData myDailyData) {
-		System.out.println("REMEMBER TO SET FILE PATHS!!!");
+	newnullptr_CalculateDamLevel(DailyData myDailyData) {
 		this.myDailyData = myDailyData;
 		myPrecip = new PrecipitationCSV();
+		System.out.println("REMEMBER TO SET FILE PATHS!!!");
 		// myPrecip.readCSV("../Example_Data/eng-daily-01012019-12312019_dailyPrecip_calgary.csv");
 		myPrecip.readCSV("eng-daily-01012019-12312019_dailyPrecip_calgary.csv");
 		myFlowRate = new FlowRateCSV();
@@ -64,13 +63,13 @@ public class CalculateDamLevel {
 	 */
 	public static void main(String[] args) {
 		GregorianCalendar myDay = new GregorianCalendar();
-		myDay.set(2019, 0, 17);
+		myDay.set(2019, 0, 15);
 		DailyData myData = new DailyData();
 		myData.setFlowRate(50);
 		myData.setPrecipitationLevel(2.9);
 		myData.setReservoirLevel(1076);
 		myData.setTheDay(myDay);
-		CalculateDamLevel myGo = new CalculateDamLevel(myData);
+		newnullptr_CalculateDamLevel myGo = new newnullptr_CalculateDamLevel(myData);
 		myGo.calculate();
 		// System.out.println(myGo.changeValue);
 		myGo.sendNewValues(myGo.changeValue);
@@ -87,7 +86,7 @@ public class CalculateDamLevel {
 		averageDay.setFlowRate(myFlowRate.getAverageSpecifiedDate(myDailyData.getTheDay()));
 		averageDay.setReservoirLevel(myDamWaterLevel.getAverageSpecifiedDate(myDailyData.getTheDay()));
 		averageDay.setTheDay(myDailyData.getTheDay());
-
+		
 		// the following outsideAverage return doubles
 		outsideAverageReservoir(previousTen, averageDay);
 		outsideAverageReservoir(myDailyData, averageDay);
@@ -95,8 +94,6 @@ public class CalculateDamLevel {
 		outsideAveragePrecipitationLevel(myDailyData, averageDay);
 		outsideAverageFlowRate(previousTen, averageDay);
 		outsideAverageFlowRate(myDailyData, averageDay);
-		
-		// sendNewValues(changeValue);
 		
 	}
 	
@@ -118,23 +115,6 @@ public class CalculateDamLevel {
 	 * @return the double
 	 */
 	double outsideAverageReservoir(DailyData actual, DailyData expected) {
-		/*System.out.println("upper: " + (expected.getReservoirLevel() - 5 + (5 * (myAcceptableReservoirPercent + 1))));
-		System.out.println("lower: " + (expected.getReservoirLevel() - 5 + (5 * (1 - myAcceptableReservoirPercent))));
-		if (actual.getReservoirLevel() > (expected.getReservoirLevel()
-				+ (expected.getReservoirLevel() * myAcceptableReservoirPercent))) {
-			double myVal = actual.getReservoirLevel()
-					- (expected.getReservoirLevel() + (expected.getReservoirLevel() * myAcceptableReservoirPercent));
-			changeValue += myVal;
-			return myVal;
-		} else if (actual.getReservoirLevel() < (expected.getReservoirLevel()
-				- (expected.getReservoirLevel() * myAcceptableReservoirPercent))) {
-			double myVal = actual.getReservoirLevel()
-					- (expected.getReservoirLevel() - (expected.getReservoirLevel() * myAcceptableReservoirPercent));
-			changeValue += myVal;
-			return myVal;
-		}
-		return 0;
-		*/
 		double upperReservoir = (expected.getReservoirLevel() - 5 + (5 * (myAcceptableReservoirPercent + 1)));
 		double lowerReservoir = (expected.getReservoirLevel() - 5 + (5 * (1 - myAcceptableReservoirPercent)));
 		System.out.println("upperreservoir: " + upperReservoir);
@@ -174,8 +154,8 @@ public class CalculateDamLevel {
 		 * changeValue += myVal; return myVal; } return 0;
 		 */
 		if (actual.getPrecipitationLevel() > myAcceptablePrecipitationAmount) {
-			changeValue -= actual.getPrecipitationLevel() * .1;
-			return -actual.getPrecipitationLevel() * .1;
+			changeValue -= (actual.getPrecipitationLevel() * .1);
+			return (-actual.getPrecipitationLevel() * .1);
 		}
 		return 0;
 	}
@@ -254,22 +234,22 @@ public class CalculateDamLevel {
 	DailyData getPreviousNDayData(GregorianCalendar theDay, int n) {
 		GregorianCalendar old_theDay = theDay;
 		DailyData previousArr[] = new DailyData[n];
-		theDay.add(Calendar.DAY_OF_MONTH, -1);
-		//TODO: set AverageSpecified to Specified.
+		
 		DailyData toReturn = new DailyData();
 		for (int i = 0; i < n; i++) {
 			previousArr[i] = new DailyData();
-			previousArr[i].setPrecipitationLevel( Double.parseDouble(myPrecip.getSpecifiedDate(theDay)));
-			previousArr[i].setFlowRate( myFlowRate.getAverageSpecifiedDate(theDay));
-			//previousArr[i].setFlowRate( Double.parseDouble(myFlowRate.getSpecifiedDate(theDay)));
-			previousArr[i].setReservoirLevel(myDamWaterLevel.getAverageSpecifiedDate(theDay));
-			//previousArr[i].setReservoirLevel( Double.parseDouble(myDamWaterLevel.getAverageSpecifiedDate(theDay)));
+			previousArr[i].setPrecipitationLevel(Double.parseDouble(myPrecip.getSpecifiedDate(theDay)));
+			System.out.println(previousArr[i].getPrecipitationLevel()+ "precip!");
+			String gettingFlow = myFlowRate.getSpecifiedDate(theDay);
+			System.out.println(gettingFlow + "Getting Flow!");
+			//previousArr[i].setFlowRate(gettingFlow);
+			previousArr[i]
+					.setReservoirLevel(Double.parseDouble(myDamWaterLevel.getSpecifiedDate(myDailyData.getTheDay())));
 			previousArr[i].setTheDay(theDay);
-			toReturn.flowRate += previousArr[i].getFlowRate();
-			toReturn.precipitationLevel += previousArr[i].getPrecipitationLevel();
-			toReturn.reservoirLevel += previousArr[i].getReservoirLevel();
+			toReturn.setFlowRate(toReturn.getFlowRate() + previousArr[i].getFlowRate());
+			toReturn.setPrecipitationLevel(toReturn.getPrecipitationLevel() + previousArr[i].getPrecipitationLevel());
+			toReturn.setReservoirLevel(toReturn.getReservoirLevel() + previousArr[i].getReservoirLevel());
 			theDay.add(Calendar.DAY_OF_MONTH, -1);
-			//theDay.
 		}
 		toReturn.setTheDay(old_theDay);
 		toReturn.setFlowRate(toReturn.getFlowRate() / n);
