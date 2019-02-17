@@ -19,7 +19,7 @@ public class calculateDamLevel {
 	
 	/** The my acceptable precipitation percent. */
 	//int			myAcceptablePrecipitationPercent	= 0;
-	double			myAcceptablePrecipitationAmount	= .340;
+	double			myAcceptablePrecipitationAmount	= 1;
 	
 	/** The change value. */
 	double		changeValue							= 0;
@@ -82,6 +82,7 @@ public class calculateDamLevel {
 	
 	/**
 	 * Outside average precipitation level.
+	 * average is 1.1-10
 	 *
 	 * @param actual   the actual
 	 * @param expected the expected
@@ -102,7 +103,11 @@ public class calculateDamLevel {
 			return myVal;
 		}
 		return 0;*/
-		if (actual.precipitationLevel > 
+		if (actual.precipitationLevel > myAcceptablePrecipitationAmount) {
+			changeValue -= actual.precipitationLevel;
+			return -actual.precipitationLevel;
+		}
+		return 0;
 	}
 	
 	/**
@@ -136,10 +141,12 @@ public class calculateDamLevel {
 		dailyData previousArr[] = new dailyData[n];
 		dailyData toReturn;
 		for (int i = 0; i < n; i++) {
-			previousArr[i] = fetchDate(theDay);
+			previousArr[i].flowRate = fetchDate(theDay);
+			previousArr[i].precipitationLevel = fetchDate(theDay);
+			previousArr[i].reservoirLevel =fetchDate(theDay);
 			toReturn.flowRate += previousArr[i].flowRate;
-			toReturn.flowRate += previousArr[i].precipitationLevel;
-			toReturn.flowRate += previousArr[i].reservoirLevel;
+			toReturn.precipitationLevel += previousArr[i].precipitationLevel;
+			toReturn.reservoirLevel += previousArr[i].reservoirLevel;
 		}
 		return toReturn;
 		
