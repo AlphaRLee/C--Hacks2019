@@ -8,6 +8,8 @@ var gravity = new b2Vec2(0, 10);
 var world = new b2World(gravity);
 //var liquidSimulation = new LiquidSimulation(world);
 
+var gate;
+
 
 function TestLiquidTimer() {
   camera.position.y = 2;
@@ -27,15 +29,15 @@ function TestLiquidTimer() {
   // shape.CreateLoop();
  ground.CreateFixtureFromShape(shape, 0.0);
 */
-
+/*
 var shape1 = new b2ChainShape;
 shape1.vertices.push(new b2Vec2(-2, 4));
 ground.CreateFixtureFromShape(shape1, 0.0);
-
-shape = new b2ChainShape;
+*/
+var shape = new b2ChainShape;
 shape.vertices.push(new b2Vec2(-1.75, 0));
 shape.vertices.push(new b2Vec2(2, 0));
-shape.vertices.push(new b2Vec2(2, 4));
+shape.vertices.push(new b2Vec2(2, 10));
 ground.CreateFixtureFromShape(shape, 0.0);
 
 
@@ -69,28 +71,43 @@ shape = new b2EdgeShape;
 shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(0.25, 0.1));
 body.CreateFixtureFromShape(shape, 0.1);
 
+//Create funnel at top
+bd = new b2BodyDef;
+body = world.CreateBody(bd);
+shape = new b2EdgeShape;
+shape.Set(new b2Vec2(-2,4), new b2Vec2(1.75, 3.5));
+body.CreateFixtureFromShape(shape, 0.1);
+
+bd = new b2BodyDef;
+body = world.CreateBody(bd);
+shape = new b2EdgeShape;
+shape.Set(new b2Vec2(-2,4), new b2Vec2(-2, 10));
+body.CreateFixtureFromShape(shape, 0.1);
+
 
 var psd;
 psd = new b2ParticleSystemDef();
 psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
+
 //
 window.setInterval(resetParticles, 50);
 // Continually create new particals
-window.setInterval(createParticals, 500, particleSystem);
+var rate = 0.1;
+window.setInterval(createParticals, 500, particleSystem, rate);
 
 
 
 }
 
-function createParticals(particleSystem){
+function createParticals(particleSystem, rate){
   //echo "called";
 
   var shape = new b2PolygonShape;
 
   //shape.SetAsBoxXYCenterAngle(sizeOfXDimension, sizeofYDimension, centerPoint, ?);
-  shape.SetAsBoxXYCenterAngle(0.1, 0.1, new b2Vec2(1, 3.5), 0);
+  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(1, 5), 0);
 
 
   var pd = new b2ParticleGroupDef;
@@ -124,10 +141,12 @@ function resetParticles(){
 //  var particles = world.particleSystems[0].GetPositionBuffer();
 //var particles = liquidSimulation.getParticles();
 var particles = this.world.particleSystems[0].GetPositionBuffer();
+/*
 console.log("x");
 console.log(particles[0]);
 console.log(particles[1]);
 console.log(typeof particles[0]);
+*/
 //console.log(particles[0].x);
   for(var i = 0; i < particles.length; i+=2){
     var p = particles[i];
@@ -154,4 +173,27 @@ console.log(typeof particles[0]);
     */
 
   }
+}
+
+/*
+TestLiquidTimer.prototype.MouseDown = function(p){
+  closeGate();
+}
+
+TestLiquidTimer.prototype.MouseUp = function(){
+  openGate();
+}
+*/
+
+function closeGate(){
+  var bd = new b2BodyDef;
+  var body = world.CreateBody(bd);
+  var shape = new b2EdgeShape;
+  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.1));
+  gate = body.CreateFixtureFromShape(shape, 0.1);
+}
+
+
+function openGate(){
+  DeleteFixtureFromShape(gate);
 }
