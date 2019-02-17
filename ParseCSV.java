@@ -175,8 +175,10 @@ public abstract class ParseCSV {
 		System.out.println(obj.getSpecifiedDate(date));
 		System.out.println(obj.getAverageSpecifiedDate(date));
 	*/	
+		obj=new DamWaterLevelCSV();
+		obj.readCSV("../C--Hacks2019/Example_Data/Daily__Feb-16-2019_11_38_47PM_GlenmoreDailyLevelData.csv");
 		date.setLenient(false);
-		date.set(2019, 1, 17);
+		date.set(2016, 1, 29);
 		System.out.println(date);
 		//System.out.println(obj.getAverageSpecifiedDate(date));
 		System.out.println("Avg is: ");
