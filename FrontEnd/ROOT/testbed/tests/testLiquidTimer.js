@@ -9,6 +9,7 @@ var world = new b2World(gravity);
 //var liquidSimulation = new LiquidSimulation(world);
 
 var gate;
+var maxParticles = 10000;
 
 
 function TestLiquidTimer() {
@@ -37,7 +38,7 @@ ground.CreateFixtureFromShape(shape1, 0.0);
 var shape = new b2ChainShape;
 shape.vertices.push(new b2Vec2(-1.75, 0));
 shape.vertices.push(new b2Vec2(2, 0));
-shape.vertices.push(new b2Vec2(2, 10));
+shape.vertices.push(new b2Vec2(2, 3.5));
 ground.CreateFixtureFromShape(shape, 0.0);
 
 
@@ -50,19 +51,19 @@ ground.CreateFixtureFromShape(shape, 0.0);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(-0.25, 3));
+shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(-0.25, 4));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(0.25,0.1), new b2Vec2(0.25, 3));
+shape.Set(new b2Vec2(0.25,0.1), new b2Vec2(0.25, 4));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,3), new b2Vec2(0.25, 3));
+shape.Set(new b2Vec2(-0.25,4), new b2Vec2(0.25, 4));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
@@ -72,6 +73,7 @@ shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(0.25, 0.1));
 body.CreateFixtureFromShape(shape, 0.1);
 
 //Create funnel at top
+/*
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
@@ -82,6 +84,13 @@ bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
 shape.Set(new b2Vec2(-2,4), new b2Vec2(-2, 10));
+body.CreateFixtureFromShape(shape, 0.1);
+*/
+
+bd = new b2BodyDef;
+body = world.CreateBody(bd);
+shape = new b2EdgeShape;
+shape.Set(new b2Vec2(2,3.5), new b2Vec2(10, 4));
 body.CreateFixtureFromShape(shape, 0.1);
 
 
@@ -103,11 +112,12 @@ window.setInterval(createParticals, 500, particleSystem, rate);
 
 function createParticals(particleSystem, rate){
   //echo "called";
+if(particleSystem.GetParticleCount() < maxParticles){
 
   var shape = new b2PolygonShape;
 
   //shape.SetAsBoxXYCenterAngle(sizeOfXDimension, sizeofYDimension, centerPoint, ?);
-  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(1, 5), 0);
+  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(3, 4), 0);
 
 
   var pd = new b2ParticleGroupDef;
@@ -118,6 +128,7 @@ function createParticals(particleSystem, rate){
   pd.shape = shape;
   pd.color = new b2ParticleColor(0, 0, 255, 0);
   var something = particleSystem.CreateParticleGroup(pd);
+}
 //var someting = particleSystem.CreateParticle(pd);
 //console.log(something);
 /*
@@ -141,9 +152,12 @@ function resetParticles(){
 //  var particles = world.particleSystems[0].GetPositionBuffer();
 //var particles = liquidSimulation.getParticles();
 var particles = this.world.particleSystems[0].GetPositionBuffer();
+var velocity = this.world.particleSystems[0].GetVelocityBuffer();
+//console.log(particles[0]);
+console.log(velocity[0]);
 /*
 console.log("x");
-console.log(particles[0]);
+
 console.log(particles[1]);
 console.log(typeof particles[0]);
 */
@@ -152,9 +166,12 @@ console.log(typeof particles[0]);
     var p = particles[i];
     if(p < -2){
       //x?
-      particles[i] = 1;
+      particles[i] = 3.5;
       //y?
-      paricles[i+1] = 3;
+      particles[i+1] = 4;
+
+      velocity[i] = 0;
+      velocity[i+1] = 0;
     }
 
     //this works!!!
