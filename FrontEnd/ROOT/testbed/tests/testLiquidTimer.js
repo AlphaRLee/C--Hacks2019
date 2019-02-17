@@ -49,7 +49,7 @@ ground.CreateFixtureFromShape(shape, 0.0);
   var body = world.CreateBody(bd);
 
 
-var gateSize = 0.13;
+var gateSize = 0.15;
   /*  Outline of Dam - Rectangle*/
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
@@ -219,7 +219,7 @@ function closeGate(){
   var body = world.CreateBody(bd);
   gateBody = body;
   var shape = new b2EdgeShape;
-  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.13));
+  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.15));
   gate = body.CreateFixtureFromShape(shape, 0.1);
   gateOpen = false;
 }
