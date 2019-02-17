@@ -49,7 +49,7 @@ ground.CreateFixtureFromShape(shape, 0.0);
   var body = world.CreateBody(bd);
 
 
-var gateSize = 0.15;
+var gateSize = 0.2;
   /*  Outline of Dam - Rectangle*/
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
@@ -99,7 +99,7 @@ body.CreateFixtureFromShape(shape, 0.1);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(8.5,2.6), new b2Vec2(2, 10));
+shape.Set(new b2Vec2(8.5,2.55), new b2Vec2(2, 10));
 body.CreateFixtureFromShape(shape, 0.1);
 
 
@@ -175,7 +175,7 @@ console.log(typeof particles[0]);
 //console.log(particles[0].x);
   for(var i = 0; i < particles.length; i+=2){
     var p = particles[i];
-    if(p < -2 || p > 10){
+    if(p < -2 || p > 20){
       //x?
     //*  console.log(Math.random());
       particles[i] = 10 + Math.random();
@@ -219,7 +219,7 @@ function closeGate(){
   var body = world.CreateBody(bd);
   gateBody = body;
   var shape = new b2EdgeShape;
-  shape.Set(new b2Vec2(0,0), new b2Vec2(0, 0.15));
+  shape.Set(new b2Vec2(0,0), new b2Vec2(0, 0.2));
   gate = body.CreateFixtureFromShape(shape, 0.1);
   gateOpen = false;
 }
