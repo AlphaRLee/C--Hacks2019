@@ -193,7 +193,7 @@ function createParticals(particleSystem){
   var pd = new b2ParticleGroupDef;
 
   //change flags?
-  pd.flags = b2_tensileParticle | b2_viscousParticle;
+  //pd.flags = b2_tensileParticle | b2_viscousParticle;
   pd.shape = shape;
   pd.color = new b2ParticleColor(0, 0, 255, 0);
   particleSystem.CreateParticleGroup(pd);
