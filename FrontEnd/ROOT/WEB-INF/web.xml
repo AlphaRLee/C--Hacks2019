@@ -11,13 +11,13 @@
     </description>
 
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>mypackage.Hello</servlet-class>
+        <servlet-name>Server</servlet-name>
+        <servlet-class>server.Server</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>Server</servlet-name>
+        <url-pattern>/server</url-pattern>
     </servlet-mapping>
 
 </web-app>
