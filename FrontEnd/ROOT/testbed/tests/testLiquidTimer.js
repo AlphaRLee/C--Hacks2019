@@ -8,6 +8,7 @@ var gravity = new b2Vec2(0, 10);
 var world = new b2World(gravity);
 //var liquidSimulation = new LiquidSimulation(world);
 
+var gateBody;
 var gate;
 var maxParticles = 10000;
 
@@ -38,7 +39,7 @@ ground.CreateFixtureFromShape(shape1, 0.0);
 var shape = new b2ChainShape;
 shape.vertices.push(new b2Vec2(-1.75, 0));
 shape.vertices.push(new b2Vec2(2, 0));
-shape.vertices.push(new b2Vec2(2, 3.5));
+shape.vertices.push(new b2Vec2(2, 2));
 ground.CreateFixtureFromShape(shape, 0.0);
 
 
@@ -90,7 +91,7 @@ body.CreateFixtureFromShape(shape, 0.1);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(2,3.5), new b2Vec2(10, 4));
+shape.Set(new b2Vec2(2,2), new b2Vec2(10, 2.4));
 body.CreateFixtureFromShape(shape, 0.1);
 
 
@@ -99,6 +100,8 @@ psd = new b2ParticleSystemDef();
 psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
+closeGate();
+openGate();
 
 //
 window.setInterval(resetParticles, 50);
@@ -117,7 +120,7 @@ if(particleSystem.GetParticleCount() < maxParticles){
   var shape = new b2PolygonShape;
 
   //shape.SetAsBoxXYCenterAngle(sizeOfXDimension, sizeofYDimension, centerPoint, ?);
-  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(3, 4), 0);
+  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(3, 2.5), 0);
 
 
   var pd = new b2ParticleGroupDef;
@@ -154,7 +157,7 @@ function resetParticles(){
 var particles = this.world.particleSystems[0].GetPositionBuffer();
 var velocity = this.world.particleSystems[0].GetVelocityBuffer();
 //console.log(particles[0]);
-console.log(velocity[0]);
+//console.log(velocity[0]);
 /*
 console.log("x");
 
@@ -168,7 +171,7 @@ console.log(typeof particles[0]);
       //x?
       particles[i] = 3.5;
       //y?
-      particles[i+1] = 4;
+      particles[i+1] = 2.5;
 
       velocity[i] = 0;
       velocity[i+1] = 0;
@@ -205,6 +208,7 @@ TestLiquidTimer.prototype.MouseUp = function(){
 function closeGate(){
   var bd = new b2BodyDef;
   var body = world.CreateBody(bd);
+  gateBody = body;
   var shape = new b2EdgeShape;
   shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.1));
   gate = body.CreateFixtureFromShape(shape, 0.1);
@@ -212,5 +216,6 @@ function closeGate(){
 
 
 function openGate(){
-  DeleteFixtureFromShape(gate);
+  //DeleteFixtureFromShape(gate);
+  gateBody.DestroyFixture(gate);
 }
