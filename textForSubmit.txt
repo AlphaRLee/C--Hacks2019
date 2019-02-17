@@ -1,5 +1,5 @@
 ## Inspiration
-Many sailors and rowers, including some of our members, have had experiences with the City of Calgary's attempts at flood mitigation. Unfortunately, they have not succeeded much in this program. Our group is hoping to use modern techniques to improve upon the current model and prevent extensive flooding damages.
+Many sailors and rowers, including some of our members, have had experiences with the City of Calgary's attempts at flood mitigation. Unfortunately, they have not succeeded much in this program. This was demonstrated during Calgary's flood of 2013. Our group is hoping to use modern techniques to improve upon the current model and prevent extensive flooding damages.
 
 ## What it does
 Our program takes the historical climate data released by Environment Canada as well as current data and calculates a dam height meant to prevent sudden flooding. This data includes: precipitation data, upstream flow rate levels, and the Glenmore Reservoir water level. 
@@ -8,14 +8,32 @@ Our program takes the historical climate data released by Environment Canada as 
 We separated this project into two major segments: Front End and Back End. The front end was meant to display the effects of our program on the dam. The front end was an interface that allowed a user to input current data which, once processed, will animate the effect of the new data. The back end took in data collected from Environment Canada and the Front End and calculated dam height changes to either raise or
 
 ## Challenges we ran into
-We had troubles getting the animation to work in javascript, and to interface with Java. We also had troubles finding real meteoroligical data to back up our functions.
+We had troubles getting the animation to work in JavaScript, and to interface with Java. We also had troubles finding real meteorological data to back up our functions.
 
 ## Accomplishments that we're proud of
 Parsing large CSV files correctly and calculating a reasonable range of acceptable values based on the all the data, including real historical data. 
 We had to build further on an incomplete library that was translated from object-oriented to process-oriented programming. We also had to successfully use this library that we built on.
 
 ## What we learned
-Environments Canada's data
+Environments Canada's data is super well recorded, but the documentation on instruments or how to import mass chunks is lacking/non-existant.
+We learned how to use the Liquidfun library. This also meant that we had to learn how to build on an incomplete library, and how to use a 
 
 ## What's next for Flood Mitigation - An AI Solution
-Probably some sleep, for one. If this project were to get reasources, then the main chunk of the work/ money would have to go into developing the AI further, and to accept real-time sensor data.
+Probably some sleep, for one. If this project were to get resources, then the main chunk of the work/ money would have to go into developing the AI further, and to accept real-time sensor data.Eventually, we'd like to automate the pulling of data from Environment Canada's servers directly. This can be done with a bash script, but we don't know how to run bash scripts from Java or HTML.
+In the far future, we could install water pollution/water quality sensors, and integrate those into an IoT system that imports that data into our AI.////////////////////////////////////////////////
+How do you mitigate the impact of flooding on city infrastructure
+
+Problem in-depth:
+See Calgary 2013 flood
+
+Solution: 
+Analyze historical data
+Predict flood water levels
+Use data to automate dam drainage 
+This already exists, but we can act even faster
+
+We empty out the dam 
+
+
+Addenum:
+Also monitor water pollution/water quality
