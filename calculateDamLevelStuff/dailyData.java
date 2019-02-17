@@ -1,4 +1,4 @@
-package calculateDamLevelStuff;
+
 
 import java.util.GregorianCalendar;
 

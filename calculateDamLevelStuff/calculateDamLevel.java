@@ -1,4 +1,4 @@
-package calculateDamLevelStuff;
+
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -45,35 +45,58 @@ public class CalculateDamLevel {
 	CalculateDamLevel(DailyData myDailyData) {
 		this.myDailyData = myDailyData;
 		myPrecip = new PrecipitationCSV();
-		System.out.println("REMEMBER TO SET FILE PATHS!!!");
+		//System.out.println("REMEMBER TO SET FILE PATHS!!!");
 		// myPrecip.readCSV("../Example_Data/eng-daily-01012019-12312019_dailyPrecip_calgary.csv");
-		myPrecip.readCSV("eng-daily-01012019-12312019_dailyPrecip_calgary.csv");
+		myPrecip.readCSV("../C--Hacks2019/Example_Data/eng-daily-01012019-12312019_dailyPrecip_calgary.csv");
 		myFlowRate = new FlowRateCSV();
 		// myFlowRate.readCSV("../Example_Data/Daily__Feb-16-2019_09_00_16PM_DailyFlowRates_Canmore.csv");
-		myFlowRate.readCSV("Daily__Feb-16-2019_09_00_16PM_DailyFlowRates_Canmore.csv");
+		myFlowRate.readCSV("../C--Hacks2019/Example_Data/Daily__Feb-16-2019_09_00_16PM_DailyFlowRates_Canmore.csv");
 		
 		myDamWaterLevel = new DamWaterLevelCSV();
 		// myDamWaterLevel.readCSV("../Example_Data/Daily__Feb-16-2019_11_38_47PM_GlenmoreDailyLevelData.csv");
-		myDamWaterLevel.readCSV("Daily__Feb-16-2019_11_38_47PM_GlenmoreDailyLevelData.csv");
+		myDamWaterLevel.readCSV("../C--Hacks2019/Example_Data/Daily__Feb-16-2019_11_38_47PM_GlenmoreDailyLevelData.csv");
 	}
 	
 	/**
-	 * The main method.
+	 * The modified main function
 	 *
-	 * @param args the arguments
+	 * @param date is day.month.year (all in string decimal formats), then 2 doubles.
 	 */
-	public static void main(String[] args) {
-		GregorianCalendar myDay = new GregorianCalendar();
-		myDay.set(2019, 0, 17);
+	public static double calculateNextState(String day, String month, String year, double flowInput, double levelInput) {
+		GregorianCalendar myDay = new GregorianCalendar();	//check 2019 0 17 for jan 17
+		myDay.set(Integer.parseInt(year), Integer.parseInt(month)-1, Integer.parseInt(day));
 		DailyData myData = new DailyData();
-		myData.setFlowRate(50);
-		myData.setPrecipitationLevel(2.9);
-		myData.setReservoirLevel(1076);
+		myData.setFlowRate(flowInput);
+		
+	//	myData.setPrecipitationLevel(2.9);	//FIX THIS! --> Should be fixed...? I think. 
+		myData.setPrecipitationLevel(precipValue(myDay));
+		myData.setReservoirLevel(levelInput);
 		myData.setTheDay(myDay);
-		CalculateDamLevel myGo = new CalculateDamLevel(myData);
+		CalculateDamLevel myGo = new CalculateDamLevel(myData); 
 		myGo.calculate();
 		// System.out.println(myGo.changeValue);
-		myGo.sendNewValues(myGo.changeValue);
+	//	myGo.sendNewValues(myGo.changeValue);
+		return myGo.changeValue;
+
+		
+	}
+	
+	public static double precipValue(GregorianCalendar date)
+	{
+		PrecipitationCSV temp=new PrecipitationCSV();
+		temp.readCSV("../C--Hacks2019/Example_Data/eng-daily-01012019-12312019_dailyPrecip_calgary.csv");
+		double retVal=temp.getAverageSpecifiedDate(date);
+		if(retVal==0||retVal<0)
+			return 0;
+		else
+			return retVal;
+	}
+	
+	
+	public static void main (String[] args)
+	{
+	//	tDay.set(2019, 0, 17);
+		calculateNextState("17", "1", "2019", 50, 1076);
 	}
 	
 	/**
@@ -225,6 +248,8 @@ public class CalculateDamLevel {
 		return 0;
 	}
 	
+//	private static GregorianCalendar tDay= new GregorianCalendar();
+	
 	/**
 	 * Gets the previous N day data.
 	 *
@@ -240,9 +265,9 @@ public class CalculateDamLevel {
 		for (int i = 0; i < n; i++) {
 			previousArr[i] = new DailyData();
 			previousArr[i].setPrecipitationLevel(Double.parseDouble(myPrecip.getSpecifiedDate(theDay)));
-			previousArr[i].setFlowRate(Double.parseDouble(myFlowRate.getSpecifiedDate(theDay)));
+			previousArr[i].setFlowRate(/*Double.parseDouble(*/myFlowRate.getAverageSpecifiedDate(theDay));//);
 			previousArr[i]
-					.setReservoirLevel(Double.parseDouble(myDamWaterLevel.getSpecifiedDate(myDailyData.getTheDay())));
+					.setReservoirLevel(/*Double.parseDouble(*/myDamWaterLevel.getAverageSpecifiedDate(myDailyData.getTheDay()));//);
 			previousArr[i].setTheDay(theDay);
 			toReturn.setFlowRate(toReturn.getFlowRate() + previousArr[i].getFlowRate());
 			toReturn.setPrecipitationLevel(toReturn.getPrecipitationLevel() + previousArr[i].getPrecipitationLevel());
