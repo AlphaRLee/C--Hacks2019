@@ -230,6 +230,21 @@ TestLiquidTimer.prototype.MouseUp = function(){
   openGate();
 }
 */
+function measureWater(){
+  var particles = this.world.particleSystems[0].GetPositionBuffer();
+  var particlesInDam = 0;
+  for(var i = 0; i < particles.length; i+=2){
+  //  var p = particles[i];
+    if(particles[i] > 0 && particles[i] < 2){
+      particlesInDam++;
+    }
+
+    //how many particals wide?
+  }
+  //window.alert(particlesInDam);
+  var height = particlesInDam/1550;
+  return height;
+}
 
 function closeGate(){
   var bd = new b2BodyDef;
@@ -248,9 +263,30 @@ function openGate(){
   gateOpen = true;
 }
 
+function setGate(height){
+  if(gate != null){
+    gateBody.DestroyFixture(gate);
+  }
+  var bd = new b2BodyDef;
+  var body = world.CreateBody(bd);
+  gateBody = body;
+  var shape = new b2EdgeShape;
+  shape.Set(new b2Vec2(0,height), new b2Vec2(0, 0.2));
+  gate = body.CreateFixtureFromShape(shape, 0.1);
+
+  gateOpen = false;
+
+}
+
 window.addEventListener('click', function () {
   if(gateOpen)
     closeGate();
   else {
     openGate();
   } });
+
+/*
+  window.addEventListener('keypress', function(){
+    measureWater();
+  })
+  */
