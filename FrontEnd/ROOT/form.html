@@ -26,13 +26,35 @@
 <h3> Dam Manager </h3>
 <div>
 	<form>
-		<input type="text" name="day" placeholder="Day...">
-		<input type="text" name="month" placeholder="Month...">
-		<input type="text" name="year" placeholder="Year...">
-		<input type="text" name="flow" placeholder="Flow...">
-		<input type="text" name="wLevel" placeholder="Water Level...">
-		<input type="submit" value="Submit">	
+		<input type="text" id="day" placeholder="Day...">
+		<input type="text" id="month" placeholder="Month...">
+		<input type="text" id="year" placeholder="Year...">
+		<input type="text" id="flow" placeholder="Flow...">
+		<input type="text" id="wLevel" placeholder="Water Level...">
+		<input type="submit" value="Submit" onclick="testAjax()">	
 	</form>
 </div>
+<script>
+function testAjax() { // FIXME Deleteme
+	var day = document.getElementById('day').innerHTML;
+	var month = document.getElementById('month').innerHTML;
+	var year = document.getElementById('year').innerHTML;
+	var flow = document.getElementById('flow').innerHTML;
+	var wLevel = document.getElementById('wLevel').innerHTML;
+	
+    $.get("server", {
+        requestName: "stuff",
+        day: day,
+        month: month,
+        year: year,
+        wLevel: wLevel,
+        flow: flow
+    }, function(data, status) {
+        console.log("!!! AJAX RESPONSE: " + data);
+        $("#output").text(data);
+    });
+}
+</script>
+
 </body>
 </html>
