@@ -1,5 +1,7 @@
 /*testLiquidTimer.js*/
 
+var psd;
+
 function TestLiquidTimer() {
   camera.position.y = 2;
   camera.position.z = 3;
@@ -15,6 +17,11 @@ function TestLiquidTimer() {
   shape.CreateLoop();
   ground.CreateFixtureFromShape(shape, 0.0);
 
+  psd = new b2ParticleSystemDef();
+  psd.radius = 0.025;
+  var particleSystem = world.CreateParticleSystem(psd);
+
+/*
   var psd = new b2ParticleSystemDef();
   psd.radius = 0.025;
   var particleSystem = world.CreateParticleSystem(psd);
@@ -28,6 +35,7 @@ function TestLiquidTimer() {
   pd.flags = b2_tensileParticle | b2_viscousParticle;
   pd.shape = shape;
   particleSystem.CreateParticleGroup(pd);
+  */
 
 
   bd = new b2BodyDef;
@@ -145,37 +153,41 @@ body.CreateFixtureFromShape(shape, 0.1);
 
 
 // Continually create new particals
-//window.setInterval(createParticals, 1000);
+window.setInterval(createParticals, 1000);
+
 /*
-
 var i;
-for(i = 0; i < 10000; i++){
-  if(i%1000 == 0){
-  //  createParticals();
-  shape = new b2PolygonShape;
-  shape.SetAsBoxXYCenterAngle(2, 0.4, new b2Vec2(3, 3.6), 0);
+for(i = 0; i < 10000000; i++){
 
-
-  var pd = new b2ParticleGroupDef;
-  pd.flags = b2_tensileParticle | b2_viscousParticle;
-  pd.shape = shape;
-  particleSystem.CreateParticleGroup(pd);
-
-  }
 }
+
+shape = new b2PolygonShape;
+shape.SetAsBoxXYCenterAngle(2, 0.4, new b2Vec2(1, 1.2), 0);
+
+
+var pd = new b2ParticleGroupDef;
+pd.flags = b2_tensileParticle | b2_viscousParticle;
+pd.shape = shape;
+particleSystem.CreateParticleGroup(pd);
 */
 
 
 }
 
 function createParticals(){
+  //echo "called";
 
-  shape = new b2PolygonShape;
-  shape.SetAsBoxXYCenterAngle(2, 0.4, new b2Vec2(3, 3.6), 0);
+
+
+  var shape = new b2PolygonShape;
+  shape.SetAsBoxXYCenterAngle(2, 0.4, new b2Vec2(3, 3.1), 0);
 
 
   var pd = new b2ParticleGroupDef;
   pd.flags = b2_tensileParticle | b2_viscousParticle;
   pd.shape = shape;
+  pd.color = new b2ParticleColor(0, 0, 255, 0);
   particleSystem.CreateParticleGroup(pd);
+
+
 }
