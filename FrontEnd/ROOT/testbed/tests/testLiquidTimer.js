@@ -9,14 +9,13 @@ function TestLiquidTimer() {
   var bd = new b2BodyDef;
   var ground = world.CreateBody(bd);
 
-//Box to contain the simulation
-  var shape = new b2ChainShape;
+  shape.vertices.push(new b2Vec2(-2, 4));
   shape.vertices.push(new b2Vec2(-2, 0));
   shape.vertices.push(new b2Vec2(2, 0));
   shape.vertices.push(new b2Vec2(2, 4));
-  shape.vertices.push(new b2Vec2(-2, 4));
-  shape.CreateLoop();
-  ground.CreateFixtureFromShape(shape, 0.0);
+  // shape.CreateLoop();
+ ground.CreateFixtureFromShape(shape, 0.0);
+
 
 
 
