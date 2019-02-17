@@ -33,8 +33,8 @@ function initTestbed() {
   camera = new THREE.PerspectiveCamera(70
     , windowWidth / windowHeight
     , 1, 1000);
-  threeRenderer = new THREE.WebGLRenderer();
-  threeRenderer.setClearColor(0xEEEEEE);
+  threeRenderer = new THREE.WebGLRenderer({alpha: true});
+  threeRenderer.setClearColor(0, 0);
   threeRenderer.setSize(windowWidth, windowHeight);
 
   camera.position.x = 0;
