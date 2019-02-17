@@ -264,6 +264,9 @@ function openGate(){
 }
 
 function setGate(height){
+  height = height/10 + 0.1;
+
+
   if(gate != null){
     gateBody.DestroyFixture(gate);
   }
