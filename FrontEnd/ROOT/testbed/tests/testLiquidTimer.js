@@ -271,9 +271,9 @@ function setGate(height){
   var body = world.CreateBody(bd);
   gateBody = body;
   var shape = new b2EdgeShape;
-  shape.Set(new b2Vec2(0,0), new b2Vec2(0, height));
+  shape.Set(new b2Vec2(0,height), new b2Vec2(0, 0.2));
   gate = body.CreateFixtureFromShape(shape, 0.1);
-  
+
   gateOpen = false;
 
 }
