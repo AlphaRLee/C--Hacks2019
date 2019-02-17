@@ -68,7 +68,7 @@ public class DamWaterLevelCSV extends ParseCSV {
 		{
 			int line=genCounter*YEAR_SEPARATION+headLineNumber+day-1;
 			retVal=getString(line, monthRow);
-			System.out.println(getList(line) + "line and row are: "+line+" "+monthRow);
+		//	System.out.println(getList(line) + "line and row are: "+line+" "+monthRow);
 			if(retVal!=null&&!retVal.isEmpty())
 			{
 				if(day==29) {
