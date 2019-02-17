@@ -12,13 +12,14 @@ public class calculateDamLevel {
 	dailyData	myDailyData;
 	
 	/** The my acceptable range percent. */
-	int			myAcceptableReservoirPercent		= 0;
+	double			myAcceptableReservoirPercent		= .340;
 	
 	/** The my acceptable flow rate percent. */
-	int			myAcceptableFlowRatePercent			= 0;
+	double			myAcceptableFlowRatePercent			= .340;
 	
 	/** The my acceptable precipitation percent. */
-	int			myAcceptablePrecipitationPercent	= 0;
+	//int			myAcceptablePrecipitationPercent	= 0;
+	double			myAcceptablePrecipitationAmount	= 1;
 	
 	/** The change value. */
 	double		changeValue							= 0;
@@ -81,13 +82,14 @@ public class calculateDamLevel {
 	
 	/**
 	 * Outside average precipitation level.
+	 * average is 1.1-10
 	 *
 	 * @param actual   the actual
 	 * @param expected the expected
 	 * @return the double
 	 */
 	double outsideAveragePrecipitationLevel(dailyData actual, dailyData expected) {
-		if (actual.precipitationLevel > (expected.precipitationLevel
+		/*if (actual.precipitationLevel > (expected.precipitationLevel
 				+ (expected.precipitationLevel * myAcceptablePrecipitationPercent))) {
 			double myVal = actual.precipitationLevel
 					- (expected.precipitationLevel + (expected.precipitationLevel * myAcceptablePrecipitationPercent));
@@ -99,6 +101,11 @@ public class calculateDamLevel {
 					- (expected.precipitationLevel - (expected.precipitationLevel * myAcceptablePrecipitationPercent));
 			changeValue += myVal;
 			return myVal;
+		}
+		return 0;*/
+		if (actual.precipitationLevel > myAcceptablePrecipitationAmount) {
+			changeValue -= actual.precipitationLevel;
+			return -actual.precipitationLevel;
 		}
 		return 0;
 	}
@@ -134,10 +141,12 @@ public class calculateDamLevel {
 		dailyData previousArr[] = new dailyData[n];
 		dailyData toReturn;
 		for (int i = 0; i < n; i++) {
-			previousArr[i] = fetchDate(theDay);
+			previousArr[i].flowRate = fetchDate(theDay);
+			previousArr[i].precipitationLevel = fetchDate(theDay);
+			previousArr[i].reservoirLevel =fetchDate(theDay);
 			toReturn.flowRate += previousArr[i].flowRate;
-			toReturn.flowRate += previousArr[i].precipitationLevel;
-			toReturn.flowRate += previousArr[i].reservoirLevel;
+			toReturn.precipitationLevel += previousArr[i].precipitationLevel;
+			toReturn.reservoirLevel += previousArr[i].reservoirLevel;
 		}
 		return toReturn;
 		
