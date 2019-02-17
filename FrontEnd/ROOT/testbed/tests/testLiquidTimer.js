@@ -11,6 +11,7 @@ var world = new b2World(gravity);
 var gateBody;
 var gate;
 var maxParticles = 10000;
+var gateOpen = true;
 
 
 function TestLiquidTimer() {
@@ -169,7 +170,7 @@ console.log(typeof particles[0]);
     var p = particles[i];
     if(p < -2 || p > 10){
       //x?
-    //  console.log(Math.random());
+    //*  console.log(Math.random());
       particles[i] = 3.5 + Math.random();
       //y?
       particles[i+1] = 3 + Math.random();
@@ -213,10 +214,19 @@ function closeGate(){
   var shape = new b2EdgeShape;
   shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.1));
   gate = body.CreateFixtureFromShape(shape, 0.1);
+  gateOpen = false;
 }
 
 
 function openGate(){
   //DeleteFixtureFromShape(gate);
   gateBody.DestroyFixture(gate);
+  gateOpen = true;
 }
+
+window.addEventListener('click', function () {
+  if(gateOpen)
+    closeGate();
+  else {
+    openGate();
+  } });
