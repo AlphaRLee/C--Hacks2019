@@ -264,7 +264,7 @@ function openGate(){
 }
 
 function setGate(height){
-  height = height/10 + 0.1;
+  height = height/100 + 0.1;
 
 
   if(gate != null){
