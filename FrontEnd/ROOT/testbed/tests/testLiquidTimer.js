@@ -184,15 +184,15 @@ particleSystem.CreateParticleGroup(pd);
 function createParticals(particleSystem){
   //echo "called";
 
-
-
-
-
   var shape = new b2PolygonShape;
+
+  //shape.SetAsBoxXYCenterAngle(sizeOfXDimension, sizeofYDimension, centerPoint, ?);
   shape.SetAsBoxXYCenterAngle(0.1, 0.1, new b2Vec2(1, 3.5), 0);
 
 
   var pd = new b2ParticleGroupDef;
+
+  //change flags?
   pd.flags = b2_tensileParticle | b2_viscousParticle;
   pd.shape = shape;
   pd.color = new b2ParticleColor(0, 0, 255, 0);
