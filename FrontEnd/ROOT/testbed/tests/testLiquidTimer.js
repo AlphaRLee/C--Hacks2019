@@ -52,19 +52,19 @@ ground.CreateFixtureFromShape(shape, 0.0);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(-0.25, 4));
+shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(-0.25, 3.75));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(0.25,0.1), new b2Vec2(0.25, 4));
+shape.Set(new b2Vec2(0.25,0.1), new b2Vec2(0.25, 3.75));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,4), new b2Vec2(0.25, 4));
+shape.Set(new b2Vec2(-0.25,3.75), new b2Vec2(0.25, 3.75));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
@@ -120,7 +120,7 @@ if(particleSystem.GetParticleCount() < maxParticles){
   var shape = new b2PolygonShape;
 
   //shape.SetAsBoxXYCenterAngle(sizeOfXDimension, sizeofYDimension, centerPoint, ?);
-  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(3, 2.5), 0);
+  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(3, 3), 0);
 
 
   var pd = new b2ParticleGroupDef;
@@ -167,11 +167,12 @@ console.log(typeof particles[0]);
 //console.log(particles[0].x);
   for(var i = 0; i < particles.length; i+=2){
     var p = particles[i];
-    if(p < -2){
+    if(p < -2 || p > 10){
       //x?
-      particles[i] = 3.5;
+    //  console.log(Math.random());
+      particles[i] = 3.5 + Math.random();
       //y?
-      particles[i+1] = 2.5;
+      particles[i+1] = 3 + Math.random();
 
       velocity[i] = 0;
       velocity[i+1] = 0;
