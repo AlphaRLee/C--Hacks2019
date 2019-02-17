@@ -2,12 +2,16 @@
 
 //var psd;
 
+var particles = [];
+
 
 function TestLiquidTimer() {
   camera.position.y = 2;
   camera.position.z = 3;
   var bd = new b2BodyDef;
   var ground = world.CreateBody(bd);
+
+
 
 //Box to contain the simulation
   var shape = new b2ChainShape;
@@ -56,7 +60,7 @@ psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
 
-window.setInterval(resetParticles, 10);
+//window.setInterval(resetParticles, 10);
 // Continually create new particals
 window.setInterval(createParticals, 500, particleSystem);
 
@@ -74,13 +78,15 @@ function createParticals(particleSystem){
 
 
   var pd = new b2ParticleGroupDef;
+//  var pd = new b2ParticleDef;
 
   //change flags?
   pd.flags = b2_tensileParticle;
   pd.shape = shape;
   pd.color = new b2ParticleColor(0, 0, 255, 0);
   particleSystem.CreateParticleGroup(pd);
-
+// particleSystem.CreateParticle(pd);
+//particles.push(index);
 
 }
 
@@ -88,7 +94,7 @@ function resetParticles(){
   //var particles = world.getParticles();
   var particles = world.particleSystems[0].GetPositionBuffer();
   for(var i = 0; i < particles.length; i++){
-    var p = stage.particles[i];
+    var p = particles[i];
     if(p.position.y < 0){
       p.position.set(1, 3);
     }else if(p.position.x < -0.25){
