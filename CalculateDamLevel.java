@@ -291,9 +291,9 @@ public class CalculateDamLevel {
 			previousArr[i].setReservoirLevel(myDamWaterLevel.getAverageSpecifiedDate(theDay));
 			//previousArr[i].setReservoirLevel( Double.parseDouble(myDamWaterLevel.getAverageSpecifiedDate(theDay)));
 			previousArr[i].setTheDay(theDay);
-			toReturn.flowRate += previousArr[i].getFlowRate();
-			toReturn.precipitationLevel += previousArr[i].getPrecipitationLevel();
-			toReturn.reservoirLevel += previousArr[i].getReservoirLevel();
+			toReturn.setFlowRate(toReturn.getFlowRate() + previousArr[i].getFlowRate());
+			toReturn.setPrecipitationLevel(toReturn.getPrecipitationLevel() + previousArr[i].getPrecipitationLevel());
+			toReturn.setReservoirLevel(toReturn.getReservoirLevel() + previousArr[i].getReservoirLevel());
 			theDay.add(Calendar.DAY_OF_MONTH, -1);
 			//theDay.
 		}

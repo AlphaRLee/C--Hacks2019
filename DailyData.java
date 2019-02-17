@@ -43,14 +43,14 @@ public class DailyData {
 	}
 	
 	/** The day. */
-	private GregorianCalendar	theDay;
+	GregorianCalendar	theDay;
 	
 	/** The flow rate. */
-	private double				flowRate;
+	double				flowRate;
 	
 	/** The precipitation level. */
-	private double				precipitationLevel;
+	double				precipitationLevel;
 	
 	/** The reservoir level. */
-	private double				reservoirLevel;
+	double				reservoirLevel;
 }
