@@ -177,11 +177,15 @@ public abstract class ParseCSV {
 	*/	
 		obj=new DamWaterLevelCSV();
 		obj.readCSV("../C--Hacks2019/Example_Data/Daily__Feb-16-2019_11_38_47PM_GlenmoreDailyLevelData.csv");
+		obj=new PrecipitationCSV();
+		obj.readCSV("../C--Hacks2019/Example_Data/eng-daily-01012019-12312019_dailyPrecip_calgary.csv");
+	
+		
 		date.setLenient(false);
-		date.set(2016, 1, 29);
+		date.set(2019, 0, 17);
 		System.out.println(date);
 		//System.out.println(obj.getAverageSpecifiedDate(date));
-		System.out.println("Avg is: ");
+	//	System.out.println("Avg is: ");
 		System.out.println(obj.getAverageSpecifiedDate(date));
 	}
 
