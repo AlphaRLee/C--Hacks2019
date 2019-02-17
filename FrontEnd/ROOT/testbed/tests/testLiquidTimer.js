@@ -125,14 +125,16 @@ psd = new b2ParticleSystemDef();
 psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
-closeGate();
-openGate();
+//closeGate();
+//openGate();
+//setGate(10);
 
 //
 window.setInterval(resetParticles, 50);
 // Continually create new particals
 var rate = 0.1;
 window.setInterval(createParticals, 500, particleSystem, rate);
+
 
 
 
@@ -267,9 +269,10 @@ function setGate(height){
   height = height/100 + 0.1;
 
 
-  if(gate != null){
+  if(!gateOpen){
     gateBody.DestroyFixture(gate);
   }
+
   var bd = new b2BodyDef;
   var body = world.CreateBody(bd);
   gateBody = body;
