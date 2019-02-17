@@ -115,13 +115,13 @@ function TestLiquidTimer() {
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,0.25), new b2Vec2(-0.25, 3));
+shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(-0.25, 3));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(0.25,0.25), new b2Vec2(0.25, 3));
+shape.Set(new b2Vec2(0.25,0.1), new b2Vec2(0.25, 3));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
@@ -133,7 +133,7 @@ body.CreateFixtureFromShape(shape, 0.1);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,0.25), new b2Vec2(0.25, 0.25));
+shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(0.25, 0.1));
 body.CreateFixtureFromShape(shape, 0.1);
 
 //Gate
@@ -160,7 +160,7 @@ psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
 // Continually create new particals
-window.setInterval(createParticals, 1000, particleSystem);
+window.setInterval(createParticals, 500, particleSystem);
 
 /*
 var i;
