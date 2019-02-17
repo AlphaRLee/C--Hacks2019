@@ -263,6 +263,21 @@ function openGate(){
   gateOpen = true;
 }
 
+function setGate(height){
+  if(gate != null){
+    gateBody.DestroyFixture(gate);
+  }
+  var bd = new b2BodyDef;
+  var body = world.CreateBody(bd);
+  gateBody = body;
+  var shape = new b2EdgeShape;
+  shape.Set(new b2Vec2(0,0), new b2Vec2(0, height));
+  gate = body.CreateFixtureFromShape(shape, 0.1);
+  
+  gateOpen = false;
+
+}
+
 window.addEventListener('click', function () {
   if(gateOpen)
     closeGate();
