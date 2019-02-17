@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
 	body{
@@ -25,25 +25,27 @@
 <body>
 <h3> Dam Manager </h3>
 <div>
-	<form>
 		<input type="text" id="day" placeholder="Day...">
 		<input type="text" id="month" placeholder="Month...">
 		<input type="text" id="year" placeholder="Year...">
 		<input type="text" id="flow" placeholder="Flow...">
 		<input type="text" id="wLevel" placeholder="Water Level...">
-		<input type="submit" value="Submit" onclick="testAjax()">	
-	</form>
+		<!--input type="submit" value="Submit" onclick="testAjax()"-->
+		<button onclick="testAjax()">Submit</button>
 </div>
+<p id="output"></p>
 <script>
 function testAjax() { // FIXME Deleteme
-	var day = document.getElementById('day').innerHTML;
-	var month = document.getElementById('month').innerHTML;
-	var year = document.getElementById('year').innerHTML;
-	var flow = document.getElementById('flow').innerHTML;
-	var wLevel = document.getElementById('wLevel').innerHTML;
-	
+	var day = document.getElementById('day').value;
+	var month = document.getElementById('month').value;
+	var year = document.getElementById('year').value;
+	var flow = document.getElementById('flow').value;
+	var wLevel = document.getElementById('wLevel').value;
+
+	alert("The val is " + day + ' ' + month + ' ' + year + " " + flow + " " + wLevel);
+
     $.get("server", {
-        requestName: "stuff",
+        requestName: "needsToStay",
         day: day,
         month: month,
         year: year,

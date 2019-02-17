@@ -230,6 +230,21 @@ TestLiquidTimer.prototype.MouseUp = function(){
   openGate();
 }
 */
+function measureWater(){
+  var particles = this.world.particleSystems[0].GetPositionBuffer();
+  var particlesInDam = 0;
+  for(var i = 0; i < particles.length; i+=2){
+  //  var p = particles[i];
+    if(particles[i] > 0 && particles[i] < 2){
+      particlesInDam++;
+    }
+
+    //how many particals wide?
+  }
+  //window.alert(particlesInDam);
+  var height = particlesInDam/1550;
+  return height;
+}
 
 function closeGate(){
   var bd = new b2BodyDef;
@@ -254,3 +269,9 @@ window.addEventListener('click', function () {
   else {
     openGate();
   } });
+
+/*
+  window.addEventListener('keypress', function(){
+    measureWater();
+  })
+  */
