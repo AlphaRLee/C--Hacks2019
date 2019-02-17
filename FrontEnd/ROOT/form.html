@@ -31,7 +31,7 @@
 		<input type="text" id="flow" placeholder="Flow...">
 		<input type="text" id="wLevel" placeholder="Water Level...">
 		<!--input type="submit" value="Submit" onclick="testAjax()"-->
-		<button onclick="testAjax()">Submit</button>
+		<button onclick="submit()" value="Submit">Submit</button>
 </div>
 <p id="output"></p>
 <script>
@@ -41,8 +41,6 @@ function testAjax() { // FIXME Deleteme
 	var year = document.getElementById('year').value;
 	var flow = document.getElementById('flow').value;
 	var wLevel = document.getElementById('wLevel').value;
-
-	alert("The val is " + day + ' ' + month + ' ' + year + " " + flow + " " + wLevel);
 
     $.get("server", {
         requestName: "needsToStay",
