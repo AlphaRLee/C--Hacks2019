@@ -1,6 +1,6 @@
 /*testLiquidTimer.js*/
 
-var psd;
+//var psd;
 
 
 function TestLiquidTimer() {
@@ -18,9 +18,11 @@ function TestLiquidTimer() {
   shape.CreateLoop();
   ground.CreateFixtureFromShape(shape, 0.0);
 
+/*
   psd = new b2ParticleSystemDef();
   psd.radius = 0.025;
   var particleSystem = world.CreateParticleSystem(psd);
+  */
 
 /*
   var psd = new b2ParticleSystemDef();
@@ -152,9 +154,13 @@ shape.Set(new b2Vec2(-2,4), new b2Vec2(-0.25, 3));
 body.CreateFixtureFromShape(shape, 0.1);
 */
 
+var psd;
+psd = new b2ParticleSystemDef();
+psd.radius = 0.025;
+var particleSystem = world.CreateParticleSystem(psd);
 
 // Continually create new particals
-window.setInterval(createParticals, 1000);
+window.setInterval(createParticals, 1000, particleSystem);
 
 /*
 var i;
@@ -175,13 +181,15 @@ particleSystem.CreateParticleGroup(pd);
 
 }
 
-function createParticals(){
+function createParticals(particleSystem){
   //echo "called";
 
 
 
+
+
   var shape = new b2PolygonShape;
-  shape.SetAsBoxXYCenterAngle(2, 0.4, new b2Vec2(3, 3.1), 0);
+  shape.SetAsBoxXYCenterAngle(0.1, 0.1, new b2Vec2(1, 3.5), 0);
 
 
   var pd = new b2ParticleGroupDef;
