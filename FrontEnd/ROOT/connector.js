@@ -8,6 +8,6 @@ function submit() {
         wLevel: $("#wLevel").val()
     }, function(data, status) {
         var waterLevelChange = data;
-
+        setGate(waterLevelChange);
     });
 }
