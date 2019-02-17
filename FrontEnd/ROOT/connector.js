@@ -8,7 +8,7 @@ function submit() {
         wLevel: $("#wLevel").val()
     }, function(data, status) {
         var waterLevelChange = data;
-        alert("Data is: " + data);
+        // alert("Data is: " + data);
         setGate(waterLevelChange);
         // setGate(8);
     });

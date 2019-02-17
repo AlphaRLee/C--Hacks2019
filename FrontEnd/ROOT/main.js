@@ -14,14 +14,14 @@ function setup() {
     canvas.height = "866";
     canvas.style.height = "720px";
 
-    $("textarea").keyup(function(event) {
-        if (event.which == 13) {
-            alert("Now submitting!");
-            submit();
-        }
-    });
-
-    $("#wLevel").focusout(function() {
-        submit();
-    });
+    // $("textarea").keyup(function(event) {
+    //     if (event.which == 13) {
+    //         alert("Now submitting!");
+    //         submit();
+    //     }
+    // });
+    //
+    // $("#wLevel").focusout(function() {
+    //     submit();
+    // });
 }
