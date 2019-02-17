@@ -14,6 +14,10 @@
         margin: 0;
         overflow: hidden;
     }
+
+    textarea {
+        row: 1;
+    }
 </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="liquidfun.js"></script>
@@ -33,13 +37,13 @@
   <script src="main.js"></script>
 
   <body onload="setup()" style="background-color:#3993c6">
-      <div style="text-align: center;">
+      <div style="margin: 10px; text-align: center;">
           <textarea id="day" placeholder="Day"></textarea>
           <textarea id="month" placeholder="Month"></textarea>
           <textarea id="year" placeholder="Year"></textarea>
           <textarea id="flow" placeholder="Flow"></textarea>
           <textarea id="wLevel" placeholder="Water Level"></textarea>
-          <button id="submit" onclick="submit()"></textarea>
+          <button id="submit" onclick="submit()">Submit</button>
       </div>
   </body>
 

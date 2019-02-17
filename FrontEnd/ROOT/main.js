@@ -16,7 +16,7 @@ function setup() {
 
     $("textarea").keyup(function(event) {
         if (event.which == 13) {
-            alert("Submitting!");
+            alert("Now submitting!");
             submit();
         }
     });
