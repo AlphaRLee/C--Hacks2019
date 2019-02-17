@@ -2,7 +2,11 @@
 
 //var psd;
 
-var particles = [];
+//var particles = [];
+var stage = new Stage(document.getElementById('canvas'));
+var gravity = new b2Vec2(0, 10);
+var world = new b2World(gravity);
+//var liquidSimulation = new LiquidSimulation(world);
 
 
 function TestLiquidTimer() {
@@ -59,8 +63,8 @@ psd = new b2ParticleSystemDef();
 psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
-
-//window.setInterval(resetParticles, 10);
+//
+window.setInterval(resetParticles, 500);
 // Continually create new particals
 window.setInterval(createParticals, 500, particleSystem);
 
@@ -84,21 +88,51 @@ function createParticals(particleSystem){
   pd.flags = b2_tensileParticle;
   pd.shape = shape;
   pd.color = new b2ParticleColor(0, 0, 255, 0);
-  particleSystem.CreateParticleGroup(pd);
-// particleSystem.CreateParticle(pd);
-//particles.push(index);
+  var something = particleSystem.CreateParticleGroup(pd);
+//var someting = particleSystem.CreateParticle(pd);
+//console.log(something);
+/*
+var graphic = new PIXI.Graphics();
+      graphic.lineStyle(0);
+      graphic.boundsPadding = 20;
+      graphic.beginFill(color, 1);
+      graphic.drawCircle(0, 0, 3);
+      graphic.endFill();
+      graphic.cacheAsBitmap = false;
+      graphic.filters = [ blurFilter ];
+texture = app.renderer.generateTexture(graphic)
+var sprite = new PIXI.Sprite(texture);
+*/
+//particles.push(something);
 
 }
 
 function resetParticles(){
   //var particles = world.getParticles();
-  var particles = world.particleSystems[0].GetPositionBuffer();
+//  var particles = world.particleSystems[0].GetPositionBuffer();
+//var particles = liquidSimulation.getParticles();
+var particles = this.world.particleSystems[0].GetPositionBuffer();
+console.log(particles[0]);
   for(var i = 0; i < particles.length; i++){
     var p = particles[i];
-    if(p.position.y < 0){
-      p.position.set(1, 3);
-    }else if(p.position.x < -0.25){
-        p.position.set(1, 3);
+    if(p < 0){
+      particles[i] = 1;
     }
+
+    //this works!!!
+    //p.DestroyParticles();
+
+  //  console.log(p);
+/*
+    if(p < 0){
+    //  p.position.set(1, 3.7);
+    //stage.remove(p, p.index);
+
+    }else if(p.position.x < -0.25){
+      ///  stage.remove(p, p.index);
+    //    p.position.set(1, 3.7);
+    }
+    */
+
   }
 }
