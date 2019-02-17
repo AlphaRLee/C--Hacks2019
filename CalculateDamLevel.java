@@ -164,13 +164,11 @@ public class CalculateDamLevel {
 		System.out.println("upperreservoir: " + upperReservoir);
 		System.out.println("lowerreservoir: " + lowerReservoir);
 		if (actual.getReservoirLevel() > upperReservoir) {
-			double myVal = actual.getReservoirLevel()
-					- (expected.getReservoirLevel() + (expected.getReservoirLevel() * myAcceptableReservoirPercent));
-			changeValue += myVal;
-			return myVal;
+			double myVal = actual.getReservoirLevel() - upperReservoir;
+			changeValue -= myVal;
+			return -myVal;
 		} else if (actual.getReservoirLevel() < lowerReservoir) {
-			double myVal = actual.getReservoirLevel()
-					- (expected.getReservoirLevel() - (expected.getReservoirLevel() * myAcceptableReservoirPercent));
+			double myVal = lowerReservoir - actual.getReservoirLevel();
 			changeValue += myVal;
 			return myVal;
 		}
@@ -249,21 +247,18 @@ public class CalculateDamLevel {
 		if (actual.getTheDay().get(Calendar.MONTH) == 11) {
 			selectedFlowRateDeviation = 9.110849294;
 		}
-		System.out.println("upperflow: "
-				+ (expected.getFlowRate() + selectedFlowRateDeviation * (1 + myAcceptableFlowRatePercent)));
-		System.out.println("lowerflow: "
-				+ (expected.getFlowRate() + selectedFlowRateDeviation * (1 - myAcceptableFlowRatePercent)));
-		if (actual.getFlowRate() > (expected.getFlowRate() + (expected.getFlowRate() * myAcceptableFlowRatePercent))) {
-			double myVal = actual.getFlowRate()
-					- (expected.getFlowRate() + (expected.getFlowRate() * myAcceptableFlowRatePercent));
-			changeValue += myVal;
-			return myVal;
-		} else if (actual
-				.getFlowRate() < (expected.getFlowRate() - (expected.getFlowRate() * myAcceptableFlowRatePercent))) {
-			double myVal = actual.getFlowRate()
-					- (expected.getFlowRate() - (expected.getFlowRate() * myAcceptableFlowRatePercent));
-			changeValue += myVal;
-			return myVal;
+		double upperflow = (expected.getFlowRate() + selectedFlowRateDeviation * (1 + myAcceptableFlowRatePercent));
+		double lowerflow = (expected.getFlowRate() + selectedFlowRateDeviation * (1 - myAcceptableFlowRatePercent));
+		System.out.println("upperflow: " + upperflow);
+		System.out.println("lowerflow: " + lowerflow);
+		if (actual.getFlowRate() > upperflow) {
+			double myVal = actual.getFlowRate() - upperflow;
+			changeValue -= (myVal*.1);
+			return (myVal*.1);
+		} else if (actual.getFlowRate() < lowerflow) {
+			double myVal = lowerflow - actual.getFlowRate();
+			changeValue += (myVal*.1);
+			return (myVal*.1);
 		}
 		return 0;
 	}
