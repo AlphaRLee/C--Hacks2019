@@ -9,14 +9,14 @@ function TestLiquidTimer() {
   var bd = new b2BodyDef;
   var ground = world.CreateBody(bd);
 
+//Box to contain the simulation
+  var shape = new b2ChainShape;
   shape.vertices.push(new b2Vec2(-2, 4));
   shape.vertices.push(new b2Vec2(-2, 0));
   shape.vertices.push(new b2Vec2(2, 0));
   shape.vertices.push(new b2Vec2(2, 4));
   // shape.CreateLoop();
  ground.CreateFixtureFromShape(shape, 0.0);
-
-
 
 
 
@@ -74,7 +74,7 @@ function createParticals(particleSystem){
   var pd = new b2ParticleGroupDef;
 
   //change flags?
-  pd.flags = b2_tensileParticle | b2_viscousParticle;
+  pd.flags = b2_tensileParticle;
   pd.shape = shape;
   pd.color = new b2ParticleColor(0, 0, 255, 0);
   particleSystem.CreateParticleGroup(pd);
