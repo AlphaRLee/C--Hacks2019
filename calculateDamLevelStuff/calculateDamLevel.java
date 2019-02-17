@@ -12,13 +12,14 @@ public class calculateDamLevel {
 	dailyData	myDailyData;
 	
 	/** The my acceptable range percent. */
-	int			myAcceptableReservoirPercent		= 0;
+	double			myAcceptableReservoirPercent		= .340;
 	
 	/** The my acceptable flow rate percent. */
-	int			myAcceptableFlowRatePercent			= 0;
+	double			myAcceptableFlowRatePercent			= .340;
 	
 	/** The my acceptable precipitation percent. */
-	int			myAcceptablePrecipitationPercent	= 0;
+	//int			myAcceptablePrecipitationPercent	= 0;
+	double			myAcceptablePrecipitationAmount	= .340;
 	
 	/** The change value. */
 	double		changeValue							= 0;
@@ -87,7 +88,7 @@ public class calculateDamLevel {
 	 * @return the double
 	 */
 	double outsideAveragePrecipitationLevel(dailyData actual, dailyData expected) {
-		if (actual.precipitationLevel > (expected.precipitationLevel
+		/*if (actual.precipitationLevel > (expected.precipitationLevel
 				+ (expected.precipitationLevel * myAcceptablePrecipitationPercent))) {
 			double myVal = actual.precipitationLevel
 					- (expected.precipitationLevel + (expected.precipitationLevel * myAcceptablePrecipitationPercent));
@@ -100,7 +101,8 @@ public class calculateDamLevel {
 			changeValue += myVal;
 			return myVal;
 		}
-		return 0;
+		return 0;*/
+		if (actual.precipitationLevel > 
 	}
 	
 	/**
