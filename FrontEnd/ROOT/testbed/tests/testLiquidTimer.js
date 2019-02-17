@@ -49,17 +49,18 @@ ground.CreateFixtureFromShape(shape, 0.0);
   var body = world.CreateBody(bd);
 
 
+var gateSize = 0.11;
   /*  Outline of Dam - Rectangle*/
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(-0.25, 3.75));
+shape.Set(new b2Vec2(-0.25, gateSize), new b2Vec2(-0.25, 3.75));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(0.25,0.1), new b2Vec2(0.25, 3.75));
+shape.Set(new b2Vec2(0.25,gateSize), new b2Vec2(0.25, 3.75));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
@@ -71,7 +72,7 @@ body.CreateFixtureFromShape(shape, 0.1);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,0.1), new b2Vec2(0.25, 0.1));
+shape.Set(new b2Vec2(-0.25,gateSize), new b2Vec2(0.25, gateSize));
 body.CreateFixtureFromShape(shape, 0.1);
 
 //Create funnel at top
@@ -93,6 +94,12 @@ bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
 shape.Set(new b2Vec2(2,2), new b2Vec2(10, 2.4));
+body.CreateFixtureFromShape(shape, 0.1);
+
+bd = new b2BodyDef;
+body = world.CreateBody(bd);
+shape = new b2EdgeShape;
+shape.Set(new b2Vec2(2,2.1), new b2Vec2(2, 10));
 body.CreateFixtureFromShape(shape, 0.1);
 
 
@@ -212,7 +219,7 @@ function closeGate(){
   var body = world.CreateBody(bd);
   gateBody = body;
   var shape = new b2EdgeShape;
-  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.1));
+  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.11));
   gate = body.CreateFixtureFromShape(shape, 0.1);
   gateOpen = false;
 }
