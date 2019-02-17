@@ -49,7 +49,7 @@ ground.CreateFixtureFromShape(shape, 0.0);
   var body = world.CreateBody(bd);
 
 
-var gateSize = 0.11;
+var gateSize = 0.13;
   /*  Outline of Dam - Rectangle*/
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
@@ -93,13 +93,13 @@ body.CreateFixtureFromShape(shape, 0.1);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(2,2), new b2Vec2(10, 2.4));
+shape.Set(new b2Vec2(2,2), new b2Vec2(20, 3));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(2,2.1), new b2Vec2(2, 10));
+shape.Set(new b2Vec2(8.5,2.6), new b2Vec2(2, 10));
 body.CreateFixtureFromShape(shape, 0.1);
 
 
@@ -128,7 +128,7 @@ if(particleSystem.GetParticleCount() < maxParticles){
   var shape = new b2PolygonShape;
 
   //shape.SetAsBoxXYCenterAngle(sizeOfXDimension, sizeofYDimension, centerPoint, ?);
-  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(3, 3), 0);
+  shape.SetAsBoxXYCenterAngle(0.1, rate, new b2Vec2(10, 3), 0);
 
 
   var pd = new b2ParticleGroupDef;
@@ -178,7 +178,7 @@ console.log(typeof particles[0]);
     if(p < -2 || p > 10){
       //x?
     //*  console.log(Math.random());
-      particles[i] = 3.5 + Math.random();
+      particles[i] = 10 + Math.random();
       //y?
       particles[i+1] = 3 + Math.random();
 
@@ -219,7 +219,7 @@ function closeGate(){
   var body = world.CreateBody(bd);
   gateBody = body;
   var shape = new b2EdgeShape;
-  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.11));
+  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.13));
   gate = body.CreateFixtureFromShape(shape, 0.1);
   gateOpen = false;
 }
