@@ -3,7 +3,7 @@
 //var psd;
 
 //var particles = [];
-var stage = new Stage(document.getElementById('canvas'));
+//var stage = new Stage(document.getElementById('canvas'));
 var gravity = new b2Vec2(0, 10);
 var world = new b2World(gravity);
 //var liquidSimulation = new LiquidSimulation(world);
@@ -18,6 +18,7 @@ function TestLiquidTimer() {
 
 
 //Box to contain the simulation
+/*
   var shape = new b2ChainShape;
   shape.vertices.push(new b2Vec2(-2, 4));
   shape.vertices.push(new b2Vec2(-2, 0));
@@ -25,6 +26,17 @@ function TestLiquidTimer() {
   shape.vertices.push(new b2Vec2(2, 4));
   // shape.CreateLoop();
  ground.CreateFixtureFromShape(shape, 0.0);
+*/
+
+var shape1 = new b2ChainShape;
+shape1.vertices.push(new b2Vec2(-2, 4));
+ground.CreateFixtureFromShape(shape1, 0.0);
+
+shape = new b2ChainShape;
+shape.vertices.push(new b2Vec2(-1.75, 0));
+shape.vertices.push(new b2Vec2(2, 0));
+shape.vertices.push(new b2Vec2(2, 4));
+ground.CreateFixtureFromShape(shape, 0.0);
 
 
 
@@ -64,7 +76,7 @@ psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
 //
-window.setInterval(resetParticles, 500);
+window.setInterval(resetParticles, 50);
 // Continually create new particals
 window.setInterval(createParticals, 500, particleSystem);
 
@@ -112,11 +124,18 @@ function resetParticles(){
 //  var particles = world.particleSystems[0].GetPositionBuffer();
 //var particles = liquidSimulation.getParticles();
 var particles = this.world.particleSystems[0].GetPositionBuffer();
+console.log("x");
 console.log(particles[0]);
-  for(var i = 0; i < particles.length; i++){
+console.log(particles[1]);
+console.log(typeof particles[0]);
+//console.log(particles[0].x);
+  for(var i = 0; i < particles.length; i+=2){
     var p = particles[i];
-    if(p < 0){
+    if(p < -2){
+      //x?
       particles[i] = 1;
+      //y?
+      paricles[i+1] = 3;
     }
 
     //this works!!!
