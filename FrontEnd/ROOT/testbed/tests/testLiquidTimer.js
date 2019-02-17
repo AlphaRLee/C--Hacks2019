@@ -54,13 +54,13 @@ var gateSize = 0.15;
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25, gateSize), new b2Vec2(-0.25, 3.75));
+shape.Set(new b2Vec2(-0.5, gateSize), new b2Vec2(-0.25, 3.75));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(0.25,gateSize), new b2Vec2(0.25, 3.75));
+shape.Set(new b2Vec2(0.5,gateSize), new b2Vec2(0.25, 3.75));
 body.CreateFixtureFromShape(shape, 0.1);
 
 bd = new b2BodyDef;
@@ -72,7 +72,7 @@ body.CreateFixtureFromShape(shape, 0.1);
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
-shape.Set(new b2Vec2(-0.25,gateSize), new b2Vec2(0.25, gateSize));
+shape.Set(new b2Vec2(-0.5,gateSize), new b2Vec2(0.5, gateSize));
 body.CreateFixtureFromShape(shape, 0.1);
 
 //Create funnel at top
@@ -219,7 +219,7 @@ function closeGate(){
   var body = world.CreateBody(bd);
   gateBody = body;
   var shape = new b2EdgeShape;
-  shape.Set(new b2Vec2(-0.25,0), new b2Vec2(-0.25, 0.15));
+  shape.Set(new b2Vec2(0,0), new b2Vec2(0, 0.15));
   gate = body.CreateFixtureFromShape(shape, 0.1);
   gateOpen = false;
 }
