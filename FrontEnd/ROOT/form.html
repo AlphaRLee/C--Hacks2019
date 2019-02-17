@@ -7,20 +7,29 @@
 	body{
 		background-color: #3993c6;
 	}
-	input[type=text]{
+	input[type=text], select{
 		display: inline-block;
+		width: 100%;
+		padding: 12px 20px;
 	}
+	input[type=submit] {
+		display: inline-block;
+		width: 100%;
+		padding: 12px 20px;
+	}
+
 </style>
 <body>
 
-
-<form>
-	<input type="text" name="day" placeholder="Day...">
-	<input type="text" name="month" placeholder="Month...">
-	<input type="text" name="year" placeholder="Year...">
-	<input type="text" name="flow" placeholder="Flow...">
-	<input type="text" name="wLevel" placeholder="Water Level...">
-	<input type="submit" value="Submit">	
-</form>
+<div>
+	<form>
+		<input type="text" name="day" placeholder="Day...">
+		<input type="text" name="month" placeholder="Month...">
+		<input type="text" name="year" placeholder="Year...">
+		<input type="text" name="flow" placeholder="Flow...">
+		<input type="text" name="wLevel" placeholder="Water Level...">
+		<input type="submit" value="Submit">	
+	</form>
+</div>
 </body>
 </html>
