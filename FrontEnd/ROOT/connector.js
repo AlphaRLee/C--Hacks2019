@@ -1,13 +1,13 @@
-function testAjax() { // FIXME Deleteme
+function submit() {
     $.get("server", {
-        requestName: "stuff",
-        day: "17",
-        month: "1",
-        year: "2019",
-        wLevel: "1075",
-        flow: "60"
+        requestName: "submit",
+        day: $("#day").val(),
+        month: $("#month").val(),
+        year: $("#year").val(),
+        flow: $("#flow").val(),
+        wLevel: $("#wLevel").val()
     }, function(data, status) {
-        console.log("!!! AJAX RESPONSE: " + data);
-        $("#output").text(data);
+        var waterLevelChange = data;
+
     });
 }
