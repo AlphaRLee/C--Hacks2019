@@ -51,6 +51,7 @@ ground.CreateFixtureFromShape(shape, 0.0);
 
 var gateSize = 0.2;
   /*  Outline of Dam - Rectangle*/
+  /*
 bd = new b2BodyDef;
 body = world.CreateBody(bd);
 shape = new b2EdgeShape;
@@ -74,6 +75,22 @@ body = world.CreateBody(bd);
 shape = new b2EdgeShape;
 shape.Set(new b2Vec2(-0.5,gateSize), new b2Vec2(0.5, gateSize));
 body.CreateFixtureFromShape(shape, 0.1);
+*/
+shape = new b2PolygonShape;
+shape.vertices.push(new b2Vec2(-0.5, gateSize));
+shape.vertices.push(new b2Vec2(-0.25, 3.75));
+shape.vertices.push(new b2Vec2(0.25, 3.75));
+shape.vertices.push(new b2Vec2(0.5, gateSize));
+ground.CreateFixtureFromShape(shape, 0.0);
+
+
+var vertices = [new b2Vec2(-0.5, gateSize), new b2Vec2(-0.25, 3.75), new b2Vec2(0.25, 3.75), new b2Vec2(0.5, gateSize)];
+//var black = b2Color(0.5, 0.5, 0.5);
+//DrawSolidPolygon(vertices, 4, black);
+
+
+
+
 
 //Create funnel at top
 /*
