@@ -55,6 +55,8 @@ psd = new b2ParticleSystemDef();
 psd.radius = 0.025;
 var particleSystem = world.CreateParticleSystem(psd);
 
+
+window.setInterval(resetParticles, 10);
 // Continually create new particals
 window.setInterval(createParticals, 500, particleSystem);
 
@@ -80,4 +82,17 @@ function createParticals(particleSystem){
   particleSystem.CreateParticleGroup(pd);
 
 
+}
+
+function resetParticles(){
+  //var particles = world.getParticles();
+  var particles = world.particleSystems[0].GetPositionBuffer();
+  for(var i = 0; i < particles.length; i++){
+    var p = stage.particles[i];
+    if(p.position.y < 0){
+      p.position.set(1, 3);
+    }else if(p.position.x < -0.25){
+        p.position.set(1, 3);
+    }
+  }
 }
